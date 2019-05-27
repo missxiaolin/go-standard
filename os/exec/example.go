@@ -13,9 +13,32 @@ import (
 func main() {
 
 	// 执行命令
-	exampleCommand()
+	exCommand()
+
+	// 执行命令
+	//exampleCommand()
 	// 查询环境变量
-	exampleLookPath()
+	//exampleLookPath()
+}
+
+func exCommand()  {
+	var (
+		cmd *exec.Cmd
+		err error
+	)
+	cmd = exec.Command("/bin/bash", "-c", "echo 1;")
+
+	// 声明buffer
+	var out bytes.Buffer
+
+	// 设置输出内容填充地址
+	cmd.Stdout = &out
+
+	err = cmd.Run()
+	fmt.Println(err)
+
+	fmt.Printf(out.String())
+
 }
 
 func exampleLookPath() {
