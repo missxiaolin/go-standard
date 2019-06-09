@@ -24,21 +24,26 @@ func main() {
 func exCommand()  {
 	var (
 		cmd *exec.Cmd
+		output []byte
 		err error
 	)
-	cmd = exec.Command("/bin/bash", "-c", "echo 1;")
+	cmd = exec.Command("/bin/bash", "-c", "echo 1; ls -l;")
 
 	// 声明buffer
-	var out bytes.Buffer
+	//var out bytes.Buffer
 
 	// 设置输出内容填充地址
-	cmd.Stdout = &out
-
-	err = cmd.Run()
-	fmt.Println(err)
-
-	fmt.Printf(out.String())
-
+	//cmd.Stdout = &out
+	//
+	//err = cmd.Run()
+	//fmt.Println(err)
+	//
+	//fmt.Printf(out.String())
+	if output, err = cmd.CombinedOutput(); err != nil{
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf(string(output))
 }
 
 func exampleLookPath() {
